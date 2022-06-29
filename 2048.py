@@ -57,6 +57,7 @@ class Juego:
         self.boardStatus = np.zeros((self.N, self.N))
         self.addNewNumber()
 
+    """agregar en cada turno nuevo numero que sera igual a 2"""
     
     def addNewNumber(self):
         freePos = zip(*np.where(self.boardStatus == 0))
@@ -64,6 +65,8 @@ class Juego:
 
         for pos in random.sample(freePos, k=1):
             self.boardStatus[pos] = 2
+
+            """tablero"""
 
     def drawBoard(self):
         self.window.fill(self.windowBgColor)
@@ -85,6 +88,9 @@ class Juego:
                     textRect = textSurface.get_rect(center=(rectX + self.blockSize/2, rectY + self.blockSize/2))
                     self.window.blit(textSurface, textRect)
 
+
+        """aumentar los numeros *2 de acuerdo a su posición"""
+    
     def compressNumber(self, data):
         result = [0]
         data = [x for x in data if x != 0]
@@ -97,6 +103,9 @@ class Juego:
         
         result = [x for x in result if x != 0]
         return result
+
+    """movimiento"""
+        
 
     def move(self, dir):
         for idx in range(self.N):
@@ -121,6 +130,10 @@ class Juego:
                 self.boardStatus[:, idx] = data
             else:
                 self.boardStatus[idx, :] = data
+
+                self.frame_index = 0
+        self.animation_speed = 0.15
+        
                 
 
     """derrota"""
@@ -194,3 +207,4 @@ if __name__ == "__main__":
 
 
 """fin"""
+
